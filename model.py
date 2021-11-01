@@ -2,9 +2,9 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-class FakeNewsModel(nn.Module):
+class Model(nn.Module):
     def __init__(self, input_size):
-        super(self, FakeNewsModel).__init__()
+        super(self, Model).__init__()
         self.fc1 = nn.Linear(input_size, 128)
         self.lstm = nn.LSTM(128, 64)
         self.fc2 = nn.Linear(64, 1)

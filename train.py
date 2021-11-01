@@ -1,13 +1,13 @@
 import torch
 import torch.nn as nn
 from data import dataset
-from model import FakeNewsModel
+from model import Model
 from torch.utils.data import DataLoader
 import matplotlib.pyplot as plt
 
-def train(x, y, input_size, trainloader, learning_rate=1e-3, epochs = 500, plot=True):
+def train(x,y, input_size, trainloader, learning_rate=1e-3, epochs = 500, plot=True):
 
-    model = FakeNewsModel(input_size=input_size)
+    model = Model(input_size=input_size)
     optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)
     loss_fn = nn.BCELoss()
     trainset = dataset(x,y)
