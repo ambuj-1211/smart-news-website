@@ -1,12 +1,14 @@
 import spacy
 from nltk.corpus import stopwords
 import re
+from sklearn.feature_extraction.text import TfidfVectorizer
 
 class PreProcessor:
 
     def __init__(self, lang = 'english'):
         self.nlp = spacy.load('en_core_web_sm')
         self.stop_words = set(stopwords.words(lang))
+        self.vectorizer = TfidfVectorizer()
 
     def remove_special_chars(self, doc):
 
