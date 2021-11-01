@@ -3,7 +3,7 @@ let newsAccordion = document.getElementById("newsAccordion");
 let source='India';
 let apiKey='8a0a6757fa284c658d6fd113c835076c';
 const xhr = new XMLHttpRequest();
-xhr.open('GET', `https://newsapi.org/v2/top-headlines?country=in&apiKey=8a0a6757fa284c658d6fd113c835076c`, true);
+xhr.open('GET', `https://newsapi.org/v2/top-headlines?country=us&apiKey=${apiKey}`, true);
 xhr.getResponseHeader('Content-type', 'application/json');
 xhr.onload = function () {
     if (this.status === 200) {
