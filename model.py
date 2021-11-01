@@ -1,8 +1,6 @@
-import re
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from data import dataset
 
 class FakeNewsModel(nn.Module):
     def __init__(self, input_size):
