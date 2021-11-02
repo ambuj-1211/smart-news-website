@@ -4,7 +4,6 @@ from model import Model
 from data import PreProcessor
 import joblib
 
-
 text = sys.argv[1]
 
 preproc = PreProcessor()
@@ -24,6 +23,6 @@ model.eval()
 y_pred = []
 
 for i, data in enumerate(text):
-    y_pred.append(int(model(data)>0.5))
+    y_pred.append(model(data))
 
 print(y_pred)
