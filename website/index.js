@@ -20,7 +20,6 @@ xhr.onload = function () {
                                 <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse${index}"
                                     aria-expanded="false" aria-controls="collapse${index}">
                                     <div class="p-3 mb-2 bg-secondary text-white">${element["title"]}</div>
-                                    
                                 </button>
                                 </h2>
                             </div>
