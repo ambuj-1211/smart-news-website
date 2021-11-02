@@ -4,50 +4,18 @@ import torch.nn.functional as F
 
 class Model(nn.Module):
     
-    def __init__(self, input_size):
+    def __init__(self, input_features=50000, hidden1=512, hidden2=128, hidden3=32, output_features=1):
         super(Model, self).__init__()
-        self.fc1 = nn.Linear(input_size, 512)
-        self.fc2 = nn.Linear(512, 128)
-        self.fc3 = nn.Linear(128,128)
-        self.fc4 = nn.Linear(128, 32)
-        self.fc5 = nn.Linear(32, 1)
+        self.fc1 = nn.Linear(input_features, hidden1)
+        self.fc2 = nn.Linear(hidden1, hidden2)
+        self.fc3 = nn.Linear(hidden2, hidden3)
+        self.out = nn.Linear(hidden3, output_features)
 
     def forward(self, x):
 
-        x = self.fc1(x)
-        x = torch.transpose(input=x, dim0=0, dim1=1)
-        x = torch.relu(x)
-
-        print("Shape after fc1: ", x.shape)
-
-        x = torch.transpose(input=x, dim0=0, dim1=1)
-
-        x = self.fc2(x)
-        x = torch.transpose(input=x, dim0=0, dim1=1)
-        x = torch.relu(x)
-
-        print("Shape after fc2: ", x.shape)
-
-        x = self.fc3(x)
-        x = torch.transpose(input=x, dim0=0, dim1=1)
-        x = torch.relu(x)
-
-        print("Shape after fc3: ", x.shape)
-
-        x = self.fc4(x)
-        x = torch.transpose(input=x, dim0=0, dim1=1)
-        x = torch.relu(x)
-
-        print("Shape after fc4: ", x.shape)
-
-        x = torch.transpose(input=x, dim0=0, dim1=1)
-        x = self.fc5(x)
-        x = torch.transpose(input=x, dim0=0, dim1=1)
-
-        print("Shape after fc5: ", x.shape)
-
-        x = torch.sigmoid(x)
-
-        x = torch.transpose(input=x, dim0=0, dim1=1)
-
-        return x
+        x = F.relu(self.fc1(x))
+        x = F.relu(self.fc2(x))
+        x = F.relu(self.fc3(x))
+        x = self.out(x)
+        
+        return torch.sigmoid(x)
