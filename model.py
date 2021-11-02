@@ -15,14 +15,39 @@ class Model(nn.Module):
     def forward(self, x):
 
         x = self.fc1(x)
+        x = torch.transpose(input=x, dim0=0, dim1=1)
         x = torch.relu(x)
+
+        print("Shape after fc1: ", x.shape)
+
+        x = torch.transpose(input=x, dim0=0, dim1=1)
+
         x = self.fc2(x)
+        x = torch.transpose(input=x, dim0=0, dim1=1)
         x = torch.relu(x)
+
+        print("Shape after fc2: ", x.shape)
+
         x = self.fc3(x)
+        x = torch.transpose(input=x, dim0=0, dim1=1)
         x = torch.relu(x)
+
+        print("Shape after fc3: ", x.shape)
+
         x = self.fc4(x)
+        x = torch.transpose(input=x, dim0=0, dim1=1)
         x = torch.relu(x)
+
+        print("Shape after fc4: ", x.shape)
+
+        x = torch.transpose(input=x, dim0=0, dim1=1)
         x = self.fc5(x)
+        x = torch.transpose(input=x, dim0=0, dim1=1)
+
+        print("Shape after fc5: ", x.shape)
+
         x = torch.sigmoid(x)
+
+        x = torch.transpose(input=x, dim0=0, dim1=1)
 
         return x
