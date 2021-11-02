@@ -1,7 +1,6 @@
 import spacy
 from nltk.corpus import stopwords
 import re
-from sklearn.feature_extraction.text import TfidfVectorizer
 import torch
 from torch.utils.data import Dataset
 
