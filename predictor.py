@@ -5,7 +5,6 @@ from data import PreProcessor
 import joblib
 
 text = sys.argv[1]
-
 preproc = PreProcessor()
 text = preproc.forward(text)
 
@@ -17,7 +16,7 @@ print(text.toarray())
 text = torch.Tensor(text.toarray())
 
 model = Model()
-model.load_state_dict(torch.load('fake_model_state_dict.pt'))
+model = torch.load('fake_model_l.pt')
 model.eval()
 
 y_pred = []

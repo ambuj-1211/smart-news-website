@@ -1,47 +1,44 @@
 import torch
 import torch.nn as nn
-from data import dataset
-from model import Model
-from torch.utils.data import DataLoader
+import numpy as np
 import matplotlib.pyplot as plt
 
-def train(x,y, input_size, learning_rate=1e-3, epochs = 500, plot=True):
 
-    model = Model(input_size=input_size)
-    optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)
+def train(model, train_X_vec, train_y):
+    epochs = 6
+    learning_rate = 1e-3
     loss_fn = nn.BCELoss()
-    trainset = dataset(x,y)
-    trainloader = DataLoader(trainset, batch_size=128, shuffle=False)
+    optimizer = torch.optim.Adam(model.parameters(), lr = learning_rate)
+    batch_size = 1024
 
-    losses = []
-    accur = []
+    final_losses = []
 
-    for epoch in range(epochs):
-        for j,(x_train, y_train) in enumerate(trainloader):
+    for i in range(epochs):
+        
+        batch_idx = 0
 
-            #output
-            output = model(x_train)
-            loss = loss_fn(output, y_train.reshape(-1,1))
+        while (batch_idx+1)*batch_size < train_X_vec.shape[0]:
+            
+            batch_X = train_X_vec[batch_idx*batch_size:(batch_idx+1)*batch_size].toarray()
+            batch_y = train_y[batch_idx*batch_size:(batch_idx+1)*batch_size]
+            y_pred = model.forward(torch.Tensor(batch_X))
 
-            #accuracy
-            predicted = model(torch.tensor(x, dtype=torch.float32))
-            acc = (predicted.reshape(-1).detach().numpy().round() == y).mean()
+            loss = loss_fn(y_pred, torch.Tensor(np.array(batch_y)))
+            final_losses.append(loss)
 
-            #backprop
             optimizer.zero_grad()
             loss.backward()
             optimizer.step()
+            batch_idx += 1
+            del batch_X
+            del batch_y
 
-            if epoch%10 == 0:
-                losses.append(loss)
-                accur.append(acc)
-                print("epoch {}\tloss : {}\t accuracy : {}".format(epoch,loss,acc))
+            print(f'Epoch #{i+1}; Batch #{batch_idx+1}; Loss: {loss.item()}')
 
+    torch.save(model, 'fake_model_l.pt')
+    torch.save(model.state_dict(), 'fake_model_state_dict.pt')
 
-            if plot:
-                plt.plot(accur)
-                plt.title('Accuracy vs Epochs')
-                plt.xlabel('epochs')
-                plt.ylabel('accuray')
-                plt.show()
-        
+    plt.plot(range(len(final_losses[:400])), final_losses[:400])
+    plt.xlabel('Batches')
+    plt.ylabel('Loss')
+    plt.show()
