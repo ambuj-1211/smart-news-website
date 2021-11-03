@@ -11,8 +11,6 @@ text = preproc.forward(text)
 vectorizer = joblib.load('tfidf_for_fakenews.pkl')
 text = vectorizer.transform([text])
 
-print(text.toarray())
-
 text = torch.Tensor(text.toarray())
 
 model = Model()
@@ -24,4 +22,4 @@ y_pred = []
 for i, data in enumerate(text):
     y_pred.append(model(data))
 
-print(y_pred)
+print(f'Fakeness Probability: {y_pred[0].item()*100:0.2f}%')
