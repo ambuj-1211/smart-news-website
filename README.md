@@ -21,6 +21,9 @@ Dataset for bias detection: https://deepblue.lib.umich.edu/data/concern/data_set
         `import nltk`
         `nltk.download('stopwords')`
 
+    5. You may also have to download en_core_web_sm model seperately. Use the following code:
+        `python -m spacy download en_core_web_sm`
+
 ## Predicting:
     Run the following: `python3 predictor.py 'text-to-be-predicted-comes-here-in-string-quotes-as-an-arg'`
 
