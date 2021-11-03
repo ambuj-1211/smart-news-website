@@ -5,21 +5,26 @@ from data import PreProcessor
 import joblib
 
 text = sys.argv[1]
-preproc = PreProcessor()
-text = preproc.forward(text)
 
-vectorizer = joblib.load('tfidf_for_fakenews.pkl')
-text = vectorizer.transform([text])
 
-text = torch.Tensor(text.toarray())
+def predict(text):
+    preproc = PreProcessor()
+    text = preproc.forward(text)
 
-model = Model()
-model = torch.load('fake_model_l.pt')
-model.eval()
+    vectorizer = joblib.load('tfidf_for_fakenews.pkl')
+    text = vectorizer.transform([text])
 
-y_pred = []
+    text = torch.Tensor(text.toarray())
 
-for i, data in enumerate(text):
-    y_pred.append(model(data))
+    model = Model()
+    model = torch.load('fake_model_l.pt')
+    model.eval()
 
-print(f'Fakeness Probability: {y_pred[0].item()*100:0.2f}%')
+    y_pred = []
+
+    for i, data in enumerate(text):
+        y_pred.append(model(data))
+
+    fakeness = f'Fakeness Probability: {y_pred[0].item()*100:0.2f}%'
+
+    return fakeness
