@@ -26,3 +26,13 @@ Dataset for bias detection: https://deepblue.lib.umich.edu/data/concern/data_set
 
 
 The trained model, state dict and other data can be found here inside this directory: https://drive.google.com/drive/folders/1clx3oHXQzJ9boJB0F_AvCCSecboCkutR?usp=sharing
+
+
+
+## Our Team:
+
+    1. Vishesh Kumar Singh (https://github.com/visheshks04)
+    2. Anuj Jain (https://github.com/anuj1160)
+    3. Ambuj Kulshreshtha (https://github.com/ambuj-1211)
+    4. Aman Shrivastava (https://github.com/coderaman-tech)
+    5. Paras Tiwari (https://github.com/PARAS759)
