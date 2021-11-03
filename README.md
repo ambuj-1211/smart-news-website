@@ -25,4 +25,4 @@ Dataset for bias detection: https://deepblue.lib.umich.edu/data/concern/data_set
     Run the following: `python3 predictor.py 'text-to-be-predicted-comes-here-in-string-quotes-as-an-arg'`
 
 
-The trained model and state dict can be found here inside this directory: https://drive.google.com/drive/folders/1clx3oHXQzJ9boJB0F_AvCCSecboCkutR?usp=sharing
+The trained model, state dict and other data can be found here inside this directory: https://drive.google.com/drive/folders/1clx3oHXQzJ9boJB0F_AvCCSecboCkutR?usp=sharing
