@@ -12,6 +12,7 @@ xhr.onload = function () {
         console.log(articles);
         let newsHtml = "";
         articles.forEach(function (element, index) {
+
             // console.log(element, index)
             let news = `<div class="card">
                             <div class="card-header" id="heading${index}">
@@ -27,6 +28,7 @@ xhr.onload = function () {
                                 <div class="card-body"> <span class="d-block p-2 bg-dark text-white">${element["content"]}.</span> <a href="${element['url']}" target="_blank" >Read more here</a>  </div>
                             </div>
                         </div>`;
+
             newsHtml += news;
         });
         newsAccordion.innerHTML = newsHtml;
